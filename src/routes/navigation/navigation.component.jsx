@@ -7,8 +7,9 @@ import { UserContext } from "../../context/user.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 import { ReactComponent as Logo} from "./../../assets/crown.svg";
 import CartDropdown from './../../components/cart-dropdown/cart-dropdown.component';
+import { NavigationContainer, LogoContainer, LinksContainer, LinkContainer } from "./navigation.styles";
 
-import './navigation.styles.scss';
+
 
 const Navigation = () => {
 
@@ -24,19 +25,19 @@ const Navigation = () => {
     return(
       <>
         <div>
-            <div className="navigation">
-                <Link className="logo-container" to='/'>
+            <NavigationContainer>
+                <LogoContainer to='/'>
                     <Logo className="logo"/>
-                </Link>
+                </LogoContainer>
                 
-                <div className="nav-links-container">
-                    <Link className="nav-link" to='/shop'>SHOP</Link>
+                <LinksContainer>
+                    <LinkContainer to='/shop'>SHOP</LinkContainer>
                     {
-                        currentUser ? (<span className="nav-link" onClick={signOutHandler}>SIGN OUT</span>): (<Link className="nav-link" to='/auth'>SIGN IN</Link>)
+                        currentUser ? (<LinkContainer as='span' onClick={signOutHandler}>SIGN OUT</LinkContainer>): (<LinkContainer to='/auth'>SIGN IN</LinkContainer>)
                     }
                     <CartIcon />
                     
-                </div>
+                </LinksContainer>
                 
 
                 {showCheckout && <CartDropdown/>  /** short circuit operator && */} 
@@ -45,7 +46,7 @@ const Navigation = () => {
                     <Link className="nav-link" to='/auth'>SIGN IN</Link>
             </div>             */}
             
-            </div>
+            </NavigationContainer>
 
             <Outlet/>
             <Footer/>
